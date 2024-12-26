@@ -1,0 +1,29 @@
+{% extends "layout/app.html" %}
+
+{% block content %}
+<h1 class="text-center">Product List</h1>
+<a href="{% url 'product_create' %}" class="btn btn-primary mb-3">Create New Product</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+            <tr>
+                <td><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></td>
+                <td>{{ product.description }}</td>
+                <td>${{ product.price }}</td>
+                <td>
+                    <a href="{% url 'product_update' product.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'product_delete' product.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
